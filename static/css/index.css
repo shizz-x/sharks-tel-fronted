@@ -1,0 +1,124 @@
+:root {
+  --font-family: "Satoshi", monospace;
+  --font-size: 24px;
+}
+
+main {
+  font-family: var(--font-family);
+  width: 100%;
+  height: 100dvh;
+  font-size: var(--font-size);
+  display: flex;
+  justify-content: center;
+}
+.content {
+  display: flex;
+  width: 60%;
+  margin: 0 20%;
+  align-items: center;
+  justify-content: center;
+}
+.description {
+  width: 600px;
+  display: flex;
+  flex-direction: column;
+  gap: 4em;
+}
+.header p {
+  margin: 0;
+  font-size: 70px;
+}
+.usage > .svg_container {
+  width: 260px;
+}
+.svg_container svg {
+  width: 100%;
+  height: 165px;
+}
+.usage {
+  display: flex;
+  gap: 2em;
+  align-items: center;
+}
+.how_it_works {
+  display: flex;
+  cursor: pointer;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px;
+  width: 205px;
+  backdrop-filter: blur(45px);
+  background-color: rgba(255, 255, 255, 0.81);
+  border-radius: 27px;
+  box-shadow: rgba(0, 0, 0, 0.616) 0px 0.241451px 1.20725px -1.625px,
+    rgba(0, 0, 0, 0.35) 0px 2px 10px -3.25px;
+}
+.how_it_works p {
+  font-size: 31.5px;
+  white-space: nowrap;
+  font-weight: 700;
+  margin: 0;
+}
+.how_it_works span {
+  font-size: 16px;
+  gap: 10px;
+  display: flex;
+}
+.how_it_works .svg_container {
+  width: 40px !important;
+  height: 30px;
+  overflow: hidden !important;
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100%;
+  position: relative;
+}
+.how_it_works .svg_container {
+  transition: 0.4s;
+}
+.how_it_works .svg_container svg {
+  transition: 0.4s;
+}
+.how_it_works .svg_container > svg {
+  position: absolute;
+  width: 14px;
+  height: 12px;
+}
+.how_it_works .svg_container > svg[data="second"] {
+  transform: translateX(-25px);
+}
+.how_it_works:hover .svg_container {
+  background-color: black;
+}
+.how_it_works:hover .svg_container > svg[data="first"] {
+  transform: translateX(25px);
+}
+.how_it_works:hover .svg_container > svg[data="second"] {
+  transform: translateX(0);
+}
+.app {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10em;
+  z-index: 1;
+}
+.blured_bg {
+  position: absolute;
+  width: 1000px;
+  height: 1000px;
+  filter: blur(120px);
+  right: 0;
+  z-index: 0;
+}
+.topup-form {
+  box-shadow: 0 0.24145061431045178px 1.207253071552259px -1.625px #0000009c,
+    0 2px 10px -3.25px #00000059;
+  padding: 10px;
+  width: 470px;
+  height: 476px;
+  background-color: #fff;
+  border-radius: 27px;
+}
