@@ -10,7 +10,7 @@ inp.onkeydown = function (e) {
   var curLen = inp.value.length;
 
   if (!e.code.startsWith("Digit")) {
-    return;
+    inp.value = "";
   }
   if (curLen == 0) {
     inp.value = "+";
