@@ -1,34 +1,20 @@
-var inp = document.getElementById("TEL");
+const paySelect = document.getElementById("PAY-SELECT-OPTIONS");
 
-var old = 0;
-inp.onclick = function (e) {
-  inp.value = "+";
-  old = 0;
+const paySelectLogos = {
+  USDT: "./static/media/tether-usdt-logo.svg",
+  USDC: "./static/media/usd-coin-usdc-logo.svg",
 };
 
-inp.onkeydown = function (e) {
-  var curLen = inp.value.length;
-
-  if (!e.code.startsWith("Digit")) {
-    inp.value = "";
-  }
-  if (curLen == 0) {
-    inp.value = "+";
-  }
-  if (curLen < old) {
-    old--;
-    return;
-  }
-
-  if (curLen == 2) inp.value = inp.value + "(";
-
-  if (curLen == 6) inp.value = inp.value + ")-";
-
-  if (curLen == 11) inp.value = inp.value + "-";
-
-  if (curLen == 14) inp.value = inp.value + "-";
-
-  if (curLen > 16) inp.value = inp.value.substring(0, inp.value.length - 1);
-
-  old++;
+const paySelectCurrency = {
+  USDT: 1,
+  USDC: 1,
 };
+
+paySelect.addEventListener("change", (e) => {
+  document.getElementById("PAY-SELECT-LOGO").src =
+    paySelectLogos[e.target.value];
+
+  document.getElementById("PAY-SELECT-CURRENCY").innerText = `${
+    e.target.value
+  } = ${1 * paySelectCurrency[e.target.value]}$`;
+});
