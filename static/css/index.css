@@ -122,3 +122,24 @@ main {
   background-color: #fff;
   border-radius: 27px;
 }
+.topup-form form {
+  height: 100%;
+  overflow: visible;
+  width: 100%;
+}
+.form-controls-wrapper {
+  width: calc(100% - 40px);
+  border: 1px solid rgba(0, 0, 0, 0.32);
+  padding: 5px 20px;
+  border-radius: 20px;
+}
+.topup-form form #TEL {
+  height: 54px;
+  border: none;
+  width: 100%;
+  font-size: 40px;
+  font-weight: 700;
+}
+.topup-form form #TEL:focus-visible {
+  outline: none;
+}
