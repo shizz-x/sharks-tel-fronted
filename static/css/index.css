@@ -154,7 +154,7 @@ main {
 }
 .topup-form form #TEL {
   height: 54px;
-  width: 100%;
+  width: max-content;
   font-size: 40px;
   font-weight: 700;
 }

@@ -231,16 +231,15 @@
             </div>
           </section>
           <section class="topup-form">
-            <form action="" method="post">
+            <form>
               <div class="form-controls-wrapper">
                 <input
                   type="tel"
                   name="tel"
                   id="TEL"
                   required
-                  minlength="17"
+                  minlength="11"
                   maxlength="17"
-                  id="TEL"
                   pattern="\b[0-9]+"
                   placeholder="+7 999 999-99-99"
                   autocomplete="off"
@@ -253,8 +252,14 @@
               <div class="form-controls-wrapper inputs">
                 <div class="inputs">
                   <p>You pay</p>
-                  <input name="pay" placeholder="12" type="number" id="PAY" />
-                  <p>12$</p>
+                  <input
+                    name="pay"
+                    placeholder="12"
+                    required
+                    type="number"
+                    id="PAY"
+                  />
+                  <p class="YOU-PAY">12$</p>
                 </div>
                 <div class="dropdowns">
                   <p class="hidden">USDT = 1$</p>
@@ -288,9 +293,9 @@
                     min="0"
                     value="1100"
                     type="number"
-                    id="PAY"
+                    id="PAYOUT"
                   />
-                  <p>12$</p>
+                  <p class="YOU-PAY">12$</p>
                 </div>
                 <div class="dropdowns">
                   <p class="hidden">USDT = 1$</p>
@@ -310,10 +315,12 @@
                     />
                   </div>
 
-                  <p>1 Rub = $0.01</p>
+                  <p id="PAY-OUT-RUBBLE">1 Rub = $0.01</p>
                 </div>
               </div>
-              <button type="submit" class="topup-button">Top Up</button>
+              <button type="button" onclick="submitForm()" class="topup-button">
+                Top Up
+              </button>
             </form>
           </section>
           <div class="usage mobile">
