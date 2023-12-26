@@ -114,6 +114,7 @@ main {
   justify-content: center;
   align-items: center;
   gap: 5em;
+  position: relative;
   z-index: 1;
 }
 .blured_bg {
@@ -132,6 +133,43 @@ main {
   height: 476px;
   background-color: #ffffffcf;
   border-radius: 27px;
+  position: relative;
+}
+.topup-form form {
+  position: relative;
+}
+.topup-form form .loader {
+  box-sizing: border-box;
+  position: absolute;
+  background-color: #00000035;
+  z-index: 213;
+  padding: 2rem;
+  border-radius: 21px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  filter: blur(10px);
+  height: 100%;
+}
+.topup-form form .loader.H {
+  display: none;
+}
+.topup-form form .loader img {
+  animation: rotate 1s infinite linear;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.topup-form form .loader img {
+  width: 50%;
+  height: 50%;
 }
 .topup-form form {
   height: 100%;
@@ -147,14 +185,23 @@ main {
   background-color: #fff;
   padding: 5px 20px;
   border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+.region {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .form-controls-wrapper.inputs {
   padding: 20px;
   display: flex;
 }
 .topup-form form #TEL {
   height: 54px;
-  width: max-content;
+  width: calc(100% - 40px);
   font-size: 40px;
   font-weight: 700;
 }

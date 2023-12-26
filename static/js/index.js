@@ -1,8 +1,39 @@
+// example of rest api response
+const regions = {
+  list: [
+    {
+      countrycode: "ru",
+      phonecode: "+7",
+      fullname: "Russia",
+      phonelength: 10,
+    },
+    {
+      countrycode: "kz",
+      phonecode: "+7",
+      fullname: "Kazakhstan",
+      phonelength: 10,
+    },
+    {
+      countrycode: "kg",
+      phonecode: "+996",
+      fullname: "Kyrgyzstan",
+      phonelength: 9,
+    },
+  ],
+};
+function flagsFromCode(code) {
+  return `<flag-${code}></flag-${code}>`;
+}
 class App {
   exchangeRate = {};
   paySelectLogos = {
     USDT: "./static/media/tether-usdt-logo.svg",
     USDC: "./static/media/usd-coin-usdc-logo.svg",
+    ZEC: "./static/media/zec.svg",
+    BTC: "./static/media/btc.svg",
+    XMR: "./static/media/xmr.svg",
+    BNB: "./static/media/bnb.svg",
+    ETH: "./static/media/eth.svg",
   };
   PAY = document.getElementById("PAY");
   PAYOUT = document.getElementById("PAYOUT");
@@ -11,11 +42,14 @@ class App {
   payOutRubble = document.getElementById("PAY-OUT-RUBBLE");
   paySelectCurrency = document.getElementById("PAY-SELECT-CURRENCY");
   paySelectOptions = document.getElementById("PAY-SELECT-OPTIONS");
+  submitButton = document.querySelector(".topup-button");
+  loader = document.querySelector(".loader");
+
   constructor() {
     this.addEventListeners();
+    this.initTooltips();
     this.fetchExchangeRate();
     this.addFetchLoop();
-    window.submitForm = this.submitForm;
   }
   addFetchLoop() {
     setInterval(() => {
@@ -24,18 +58,31 @@ class App {
   }
   addEventListeners() {
     this.paySelectOptions.addEventListener("change", (e) => {
+      this.currency = {
+        USDT: this.exchangeRate.tether.usd,
+        USDC: this.exchangeRate.tether.usd,
+        BNB: this.exchangeRate.binancecoin.usd,
+        BTC: this.exchangeRate.bitcoin.usd,
+        XMR: this.exchangeRate.monero.usd,
+        ETH: this.exchangeRate.ethereum.usd,
+        ZEC: this.exchangeRate.zcash.usd,
+      };
+
       document.getElementById("PAY-SELECT-LOGO").src =
         this.paySelectLogos[e.target.value];
-      this.paySelectCurrency.innerText = `${e.target.value} = ${this.exchangeRate.tether.usd}$`;
+      this.paySelectCurrency.innerText = `${e.target.value} = ${
+        this.currency[e.target.value]
+      }$`;
     });
     this.PAY.addEventListener("input", (e) => {
       let youpay = (
-        parseFloat(e.target.value) * this.exchangeRate.tether.usd
+        parseFloat(e.target.value) * this.currency[this.paySelectOptions.value]
       ).toFixed(3);
-      let payout =
+      let payout = (
         parseFloat(e.target.value) *
-        this.exchangeRate.tether.usd *
-        this.exchangeRate.USD.rub;
+        this.currency[this.paySelectOptions.value] *
+        this.exchangeRate.USD.rub
+      ).toFixed(3);
 
       this.youPay[0].innerText = `${youpay > 0 ? youpay : "0"}$`;
 
@@ -43,40 +90,70 @@ class App {
 
       this.PAYOUT.value = youpay > 0 ? payout : "0";
     });
+    this.PAYOUT.addEventListener("input", (e) => {
+      let youpay = (
+        parseFloat(e.target.value) / this.currency[this.paySelectOptions.value]
+      ).toFixed(3);
+      let payout = (
+        (parseFloat(e.target.value) / this.exchangeRate.USD.rub) *
+        this.currency[this.paySelectOptions.value]
+      ).toFixed(3);
+      this.youPay[0].innerText = `${youpay > 0 ? youpay : "0"}$`;
+      this.youPay[1].innerText = `${youpay > 0 ? youpay : "0"}$`;
+      this.PAY.value = payout > 0 ? payout : "0";
+    });
+    this.submitButton.onclick = this.submitForm;
   }
   async fetchExchangeRate() {
-    const rubble = await fetch(
-      "https://api.exchangerate-api.com/v4/latest/USD"
-    );
-    const currency = await fetch(
-      "https://api.coingecko.com/api/v3/simple/price?ids=tether%2Cbinancecoin%2Cbitcoin%2Cethereum%2Cmonero&vs_currencies=usd"
-    );
-    let data = await currency.json();
+    try {
+      this.loader.classList.remove("H");
 
-    data.USD = { rub: (await rubble.json()).rates.RUB };
+      const currencyfetched = await fetch("https://sharks.tel/api/currency");
 
-    this.exchangeRate = data;
+      let data = await currencyfetched.json();
 
-    this.payOutRubble.innerText = `1 RUB = ${(
-      1 / this.exchangeRate.USD.rub
-    ).toFixed(3)}$`;
+      this.exchangeRate = data;
 
-    this.youPay[0].innerText = `${12 * this.exchangeRate.tether.usd}$`;
-    this.youPay[1].innerText = `${12 * this.exchangeRate.tether.usd}$`;
+      this.currency = {
+        USDT: this.exchangeRate.tether.usd,
+        USDC: this.exchangeRate.tether.usd,
+        BNB: this.exchangeRate.binancecoin.usd,
+        BTC: this.exchangeRate.bitcoin.usd,
+        XMR: this.exchangeRate.monero.usd,
+        ETH: this.exchangeRate.ethereum.usd,
+        ZEC: this.exchangeRate.zcash.usd,
+      };
 
-    this.paySelectCurrency.innerText =
-      this.paySelectCurrency.innerText.split(" = ")[0] +
-      " = " +
-      this.exchangeRate.tether.usd +
-      "$";
+      this.payOutRubble.innerText = `1 RUB = ${(
+        1 / this.exchangeRate.USD.rub
+      ).toFixed(3)}$`;
+
+      this.paySelectCurrency.innerText =
+        this.paySelectCurrency.innerText.split(" = ")[0] +
+        " = " +
+        this.currency[this.paySelectCurrency.innerText.split(" = ")[0]] +
+        "$";
+    } catch (err) {
+      alert("error occured");
+      console.log(err);
+    } finally {
+      this.loader.classList.add("H");
+    }
+  }
+  changeNodeAttr(node, attr, value) {
+    let prevAttr = node.attributes.getNamedItem(attr);
+    prevAttr.value = value;
+    node.attributes.setNamedItem(prevAttr);
   }
   submitForm() {
     let PAY = document.getElementById("PAY").value;
-    let phoneNumber = document.getElementById("TEL").value;
+    let phoneCode = document.getElementById("REGION_VALUE").innerText;
+    console.log(phoneCode);
+    let phoneNumber = phoneCode + document.getElementById("TEL").value;
     if (parseFloat(PAY) < 0) {
       return;
     }
-    if (phoneNumber.length < 11) {
+    if (phoneNumber < 11) {
       return;
     }
     var data = {
@@ -106,6 +183,63 @@ class App {
       .catch((error) => {
         console.error("Произошла ошибка:", error);
       });
+  }
+  initTooltips() {
+    const setValue = (selector, value) => {
+      [...selector.children].forEach((element) => {
+        if (element.id === "REGION_VALUE") {
+          element.innerHTML = value;
+        }
+      });
+    };
+
+    const addListeners = (selector) => {
+      selector.onclick = () => {
+        [...selector.children].forEach((element) => {
+          if (element.nodeName === "TOOLTIP") {
+            element.classList.contains("dropped")
+              ? element.classList.remove("dropped")
+              : element.classList.add("dropped");
+          }
+        });
+      };
+    };
+
+    const getTooltipFromSelector = (selector) => {
+      [...selector.children].forEach((element) => {
+        if (element.nodeName === "TOOLTIP") {
+          return element;
+        }
+      });
+    };
+
+    [...document.getElementsByTagName("CustomSelect")].map((selector) => {
+      addListeners(selector);
+
+      [...selector.children].forEach((element) => {
+        if (element.nodeName === "TOOLTIP") {
+          regions.list.map((country) => {
+            const node = document.createElement("choice");
+
+            node.innerHTML =
+              country.phonecode + flagsFromCode(country.countrycode);
+
+            node.onclick = () => {
+              setValue(selector, country.phonecode);
+              this.changeNodeAttr(
+                this.telephone,
+                "maxlength",
+                country.phonelength
+              );
+            };
+
+            element.appendChild(node);
+          });
+
+          setValue(selector, regions.list[0].phonecode);
+        }
+      });
+    });
   }
 }
 new App();

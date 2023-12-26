@@ -1,0 +1,48 @@
+CustomSelect {
+  position: relative;
+  width: auto;
+  height: auto;
+  font-size: 40px;
+  font-weight: 700;
+  cursor: pointer;
+}
+CustomSelect > Tooltip {
+  position: absolute;
+  display: block;
+  flex-direction: column;
+  z-index: -100;
+  opacity: 0;
+  height: 0;
+  transition: all 1s;
+  box-shadow: 0 0.24145061431045178px 1.207253071552259px -1.625px #0000009c,
+    0 2px 10px -3.25px #00000059;
+  padding: 10px;
+  background-color: #ffffff;
+  border-radius: 5px;
+  border: 1px solid black;
+  display: none;
+  overflow: hidden;
+  gap: 5px;
+  font-size: 50%;
+}
+CustomSelect > Tooltip.dropped {
+  z-index: 5;
+  width: max-content;
+  display: flex;
+  opacity: 1;
+  height: fit-content;
+}
+choice {
+  align-items: center;
+  justify-content: space-between;
+  display: flex;
+  width: 100%;
+  gap: 5px;
+}
+choice img {
+  width: 1rem !important;
+}
+choice:hover {
+  background-color: #00000016;
+  border-radius: 5px;
+}

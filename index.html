@@ -7,6 +7,8 @@
     <link href="https://fonts.cdnfonts.com/css/satoshi" rel="stylesheet" />
     <link rel="stylesheet" href="./static/css/normilize.css" />
     <link rel="stylesheet" href="./static/css/index.css" />
+    <link rel="stylesheet" href="./static/css/CustomSelect.css" />
+    <script src="./static/js/flags.js"></script>
     <script defer src="./static/js/index.js"></script>
   </head>
   <body>
@@ -232,16 +234,28 @@
           </section>
           <section class="topup-form">
             <form>
+              <div class="loader H">
+                <img src="./static//media/bnb.svg" alt="" srcset="" />
+              </div>
               <div class="form-controls-wrapper">
+                <CustomSelect
+                  style="
+                    margin-right: 5px;
+                    border-bottom: 1px solid rgba(0, 0, 0, 0.32);
+                  "
+                  id="REGION"
+                >
+                  <div id="REGION_VALUE"></div>
+                  <Tooltip id="TOOLTIP"> </Tooltip>
+                </CustomSelect>
                 <input
                   type="tel"
                   name="tel"
                   id="TEL"
                   required
-                  minlength="11"
-                  maxlength="17"
+                  maxlength="10"
                   pattern="\b[0-9]+"
-                  placeholder="+7 999 999-99-99"
+                  placeholder="999 999-99-99"
                   autocomplete="off"
                   autocapitalize="off"
                   autocorrect="off"
@@ -274,6 +288,11 @@
                     <select name="pay-select" id="PAY-SELECT-OPTIONS">
                       <option value="USDT">USDT</option>
                       <option value="USDC">USDC</option>
+                      <option value="BTC">BTC</option>
+                      <option value="ETH">ETH</option>
+                      <option value="ZEC">ZEC</option>
+                      <option value="XMR">XMR</option>
+                      <option value="BNB">BNB</option>
                     </select>
                     <img
                       src="./static/media/down-arrow-svgrepo-com.svg"
@@ -289,7 +308,6 @@
                   <p>Top up</p>
                   <input
                     name="pay"
-                    disabled
                     min="0"
                     value="1100"
                     type="number"
@@ -318,9 +336,7 @@
                   <p id="PAY-OUT-RUBBLE">1 Rub = $0.01</p>
                 </div>
               </div>
-              <button type="button" onclick="submitForm()" class="topup-button">
-                Top Up
-              </button>
+              <button type="button" class="topup-button">Top Up</button>
             </form>
           </section>
           <div class="usage mobile">
