@@ -108,9 +108,35 @@ class App {
     try {
       this.loader.classList.remove("H");
 
-      const currencyfetched = await fetch("https://sharks.tel/api/currency");
+      // const currencyfetched = await fetch("https://sharks.tel/api/currency", {
+      //   mode: "no-cors",
+      // });
 
-      let data = await currencyfetched.json();
+      // let data = await currencyfetched.json();
+
+      let data = {
+        binancecoin: {
+          usd: 332.86,
+        },
+        bitcoin: {
+          usd: 42814,
+        },
+        ethereum: {
+          usd: 2382.51,
+        },
+        monero: {
+          usd: 173.79,
+        },
+        tether: {
+          usd: 1,
+        },
+        zcash: {
+          usd: 32.34,
+        },
+        USD: {
+          rub: 91.64,
+        },
+      };
 
       this.exchangeRate = data;
 

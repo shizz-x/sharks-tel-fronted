@@ -1,0 +1,41 @@
+:root {
+  --font-family: "Satoshi", monospace;
+  --font-size: 24px;
+}
+body {
+  font-family: var(--font-family);
+  font-size: var(--font-size);
+}
+.spliter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5em;
+  position: relative;
+  z-index: 1;
+}
+.content {
+  display: flex;
+  width: 60%;
+  margin: 0 20%;
+  align-items: center;
+  justify-content: center;
+}
+main {
+  width: 100vw;
+  height: 100dvh;
+
+  display: flex;
+  justify-content: center;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+.blured_bg {
+  position: absolute;
+  width: 1000px;
+  height: 1000px;
+  filter: blur(120px);
+  right: 0;
+  z-index: 0;
+}

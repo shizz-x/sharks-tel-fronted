@@ -1,0 +1,76 @@
+.description {
+  width: 600px;
+  display: flex;
+  flex-direction: column;
+  gap: 4em;
+}
+.header p {
+  margin: 0;
+  font-size: 70px;
+}
+.usage {
+  display: flex;
+  gap: 2em;
+  align-items: center;
+}
+.usage > .svg_container {
+  width: 260px;
+}
+.how_it_works {
+  display: flex;
+  cursor: pointer;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px;
+  width: 205px;
+  backdrop-filter: blur(45px);
+  background-color: rgba(255, 255, 255, 0.81);
+  border-radius: 27px;
+  box-shadow: rgba(0, 0, 0, 0.616) 0px 0.241451px 1.20725px -1.625px,
+    rgba(0, 0, 0, 0.35) 0px 2px 10px -3.25px;
+}
+.how_it_works p {
+  font-size: 31.5px;
+  white-space: nowrap;
+  font-weight: 700;
+  margin: 0;
+}
+.how_it_works span {
+  font-size: 16px;
+  gap: 10px;
+  display: flex;
+}
+.how_it_works .svg_container {
+  width: 40px !important;
+  height: 30px;
+  overflow: hidden !important;
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100%;
+  position: relative;
+}
+.how_it_works .svg_container {
+  transition: 0.4s;
+}
+.how_it_works .svg_container img {
+  transition: 0.4s;
+}
+.how_it_works .svg_container > img {
+  position: absolute;
+  width: 14px;
+  height: 12px;
+}
+.how_it_works .svg_container > img[data="second"] {
+  transform: translateX(-25px);
+}
+.how_it_works:hover .svg_container {
+  background-color: black;
+}
+.how_it_works:hover .svg_container > img[data="first"] {
+  transform: translateX(25px);
+}
+.how_it_works:hover .svg_container > img[data="second"] {
+  transform: translateX(0);
+}

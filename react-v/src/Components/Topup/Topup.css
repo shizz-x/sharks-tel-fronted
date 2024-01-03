@@ -1,0 +1,152 @@
+.topup-form {
+  box-shadow: 0 0.24145061431045178px 1.207253071552259px -1.625px #0000009c,
+    0 2px 10px -3.25px #00000059;
+  padding: 10px;
+  width: 470px;
+  height: 476px;
+  background-color: #ffffffcf;
+  border-radius: 27px;
+  position: relative;
+}
+.topup-form form {
+  position: relative;
+}
+.topup-form form .loader {
+  box-sizing: border-box;
+  position: absolute;
+  background-color: #00000035;
+  z-index: 213;
+  padding: 2rem;
+  border-radius: 21px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  filter: blur(10px);
+  height: 100%;
+}
+.topup-form form .loader.H {
+  display: none;
+}
+.topup-form form .loader img {
+  animation: rotate 1s infinite linear;
+}
+@keyframes rotate {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.topup-form form .loader img {
+  width: 50%;
+  height: 50%;
+}
+.topup-form form {
+  height: 100%;
+  overflow: visible;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.topup-form form #TEL {
+  height: 54px;
+  width: calc(100% - 40px);
+  font-size: 40px;
+  font-weight: 700;
+}
+.form-controls-wrapper {
+  width: calc(100% - 40px);
+  border: 1px solid rgba(0, 0, 0, 0.32);
+  background-color: #fff;
+  padding: 5px 20px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.region {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-controls-wrapper.inputs {
+  padding: 20px;
+  display: flex;
+}
+.form-controls-wrapper .dropdowns {
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+  width: fit-content;
+  justify-content: space-around;
+}
+.form-controls-wrapper .dropdowns P,
+.form-controls-wrapper .inputs p {
+  margin: 5px 0;
+  font-size: 16px;
+  color: rgba(0, 0, 0, 0.616);
+}
+
+.form-controls-wrapper .inputs input {
+  font-weight: 700;
+  font-size: 40px;
+  width: 100%;
+}
+.form-controls-wrapper .inputs {
+  width: 300px;
+}
+.form-controls-wrapper .inputs input::placeholder {
+  color: black;
+}
+.pay-select {
+  display: flex;
+  font-size: 16px;
+  min-width: 100px;
+  max-width: 100px;
+  border: 1px solid black;
+  gap: 5px;
+  align-items: center;
+  justify-content: space-around;
+  padding: 9px 20px;
+  border-radius: 10000px;
+}
+.pay-select img {
+  width: 30px;
+  height: 30px;
+}
+.pay-select img.down-arrow {
+  width: 18px;
+}
+.topup-button {
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    98.9215% 105.422% at 50% 50%,
+    rgb(255, 122, 0) 0%,
+    rgb(255, 0, 183) 100%
+  );
+  border: 1px solid rgb(125, 125, 125);
+  border-radius: 20px;
+  display: flex;
+  font-size: 31.5px;
+  font-weight: 500;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+.hidden {
+  opacity: 0;
+}
+input,
+select {
+  border: none;
+}
+select:focus-visible,
+input:focus-visible {
+  outline: none;
+}
